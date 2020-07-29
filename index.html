@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trial 1</title>
+    <link rel="stylesheet" href="./css/all.css">
+    <style>
+           
+                *{
+                        margin: 0;
+                        padding: 0;
+                        outline: 0;
+                        font-family: 'Times New Roman';
+                }
+                p{
+                border: 2px solid red;
+                padding: 10px;
+                }
+                table , tr{
+                        border: 1px solid black;
+                }
+               
+                table  tr td{
+                        padding: 5px;
+                        text-align: center;
+                }
+        
+                img{
+                        width: 230px; height: 230px;
+                        transform: scale(1.1);
+                }
+
+                #viewer{
+                        width: 230px; height: 230px;
+                        border: 5px solid green;
+                        overflow: hidden;
+                        border-radius: 50%;
+                        outline: none;
+                }
+    </style>
+</head>
+<body>
+    <!-- max left 685px -->
+    <!-- max top 1050px -->
+    <p>Hello im Paragraph!!!</p>
+    <ul>
+        <li>basma</li>
+        <li>basma</li>
+        <li>ba,mdsma</li>
+        <li>basj,sdma</li>
+        <li>basjs,ddmfdma</li>
+    </ul>
+
+    <table  rules="all">
+            <tr>
+                <td>Hello</td> <td>Table td 1</td> <td>I'm working</td>
+            </tr>
+
+            <tr>
+                <td>Hello</td> <td>Table td 2</td> <td>I'm working</td>
+            </tr>
+
+            <tr>
+                <td>Hello</td> <td>Table td 3</td> <td>I'm working</td>
+            </tr>
+
+            <tr>
+                <td>Hello</td> <td>Table td 4</td> <td>I'm working</td>
+            </tr>
+    </table>
+
+        <!--  max left if img 580px -->
+        <div id="viewer">
+                <img src="./Images/natalie-portman-768-2560x1600.jpg" alt="Thor da" id="img-view">
+        </div>
+        
+        <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>  
+    <script>
+
+        let body = document.querySelector("body")
+        document.addEventListener("click" , (e)=>{
+                e.preventDefault();
+                console.log("Im Working")
+                console.log(e.target)
+                // console.log(e.target.tagName)
+               
+                if(e.target.tagName === 'BODY'|| e.target.tagName === 'HTML')
+                {
+                        let createOption = prompt("Create Element : 1.Table 2.Text Area 3.Print 4.EXIT!!") 
+                        switch (Number.parseInt(createOption)) 
+                        {
+                                case 1:let tbl = document.createElement("table")
+                                        tbl.setAttribute("rules" ,"all")
+                                        let row = prompt("No. of Rows")
+                                        let col = prompt("No. of Columns")
+                                
+                                        for(let i = 0; i < row; i++)
+                                        {
+                                                var tr = tbl.insertRow();
+                                                for(var j = 0; j < col; j++)
+                                                {
+                                                        var td = tr.insertCell();
+                                                        td.appendChild(document.createTextNode('Cell'));
+                                                }
+                                        }
+                                       
+                                        document.querySelector("body").append(tbl)
+                                        break;
+                                case 2:document.querySelector("body").append(document.createElement("p"))
+                                        break;
+
+                                case 3: window.print();
+                                       break
+                                       
+                                case 4:break;
+                                default:alert("Invaid choice!!!")
+                                        break;
+                        }
+                }
+                else
+                {
+                        edit(e.target);
+                }
+                
+        })
+
+        let edit = (a) =>{
+        //     console.log(a.innerHTML)
+
+            let key = prompt("1.Change Content 2.Text Color 3.Padding 4.Margin 5.Font-Size 6.Border Radius 7.Border Color 8.Border Width  9.Font-Family 10.Position 11.Letter Spacing 12.Background Color 13.Italic 14.Bold 15.UnderLine 16.Image 17.Border 18.Delete 19.Rotate 20.EXIT!!!")
+            switch ((Number.parseInt(key.trim()))) {
+                case 1:let newContent = prompt("Content" ,a.innerHTML)
+                        a.innerHTML  = newContent;
+                        break
+            
+                case 2:  let textColor = prompt("Text Color" , window.getComputedStyle(a).color);
+                        a.style.color = textColor;
+                        break;
+                
+                case 3:let targetpadding = prompt("padding (include px,em,% with value)", window.getComputedStyle(a).padding)
+                        a.style.padding = targetpadding;
+                        break;
+                    
+                case 4:let targetMargin = prompt("Margin (include px,em,% with value)", window.getComputedStyle(a).margin)
+                        a.style.margin = targetMargin;
+                        break;
+                
+                case 5:let targetFontSize = prompt("Font-Size (include px,em,% with value Ex.)", window.getComputedStyle(a).fontSize)
+                        a.style.fontSize = targetFontSize;
+                        break;
+                
+                case 6:let bRadius = prompt("Border Radius (include px,em,% with value)", window.getComputedStyle(a).borderRadius)
+                        a.style.borderRadius = bRadius;
+                        break
+
+                case 7: let targetborderColor = prompt("Border Color" ,  window.getComputedStyle(a).borderColor)
+                        a.style.borderColor = targetborderColor;
+                        break;
+                
+                case 8: let targetborderWidth = prompt("Border Width" ,  window.getComputedStyle(a).borderWidth)
+                        a.style.borderWidth = targetborderWidth;
+                        break;
+
+                case 9: let targetFontFamily = prompt("Font Family(Ex. serif,Helvetica,Arial,sans-serif,fantasy,monospace,oblique)" ,  window.getComputedStyle(a).fontFamily)
+                        a.style.fontFamily = targetFontFamily;
+                        break;
+
+                case 10:a.style.position = "absolute" 
+                        let targetLeft = prompt("Left (include px,em,% with value)(max Value :685px )" ,  window.getComputedStyle(a).left)
+                        let targetTop = prompt("Top (include px,em,% with value)(max Value :1050px)" ,  window.getComputedStyle(a).top)
+                        
+                        a.style.left = targetLeft
+                        a.style.top =targetTop
+                        break;
+
+                case 11: let targetLetterSpace = prompt("Letter Spacing (include px,em,% with value)" ,  window.getComputedStyle(a).letterSpacing)
+                        a.style.letterSpacing = targetLetterSpace;
+                        break;
+
+                case 12: let bgColor = prompt("BackGround Color" ,  window.getComputedStyle(a).backgroundColor)
+                        a.style.backgroundColor = bgColor;
+                        break;
+
+                case 13:a.style.fontStyle === "italic" ? a.style.fontStyle = "normal" : a.style.fontStyle = "italic";
+                        break;
+                case 14:a.style.fontWeight === "bold" ? a.style.fontWeight = "normal" : a.style.fontWeight = "bold";
+                        break;
+                case 15:a.style.textDecoration === "underline" ? a.style.textDecoration = "none" : a.style.textDecoration = "underline";
+                        break;
+                case 16: var input = document.createElement('input');
+                        input.type = 'file';
+                        
+                        input.onchange = e => { 
+
+                        // getting a hold of the file reference
+                                var file = e.target.files[0]; 
+
+                                // setting up the reader
+                                var reader = new FileReader();
+                                reader.readAsDataURL(file)
+
+                                // here we tell the reader what to do when it's done reading...
+                                reader.onload = readerEvent => {
+                                        document.querySelector("#img-view").src = readerEvent.target.result; // this is the content!
+                                }
+
+                        }
+
+                        input.click();
+                        break;
+
+                case 17: window.getComputedStyle(a).border.includes("solid") ? a.style.border = "none":  a.style.border = "2px solid black";
+                        break;
+                case 18:a.remove();
+                        break;
+                case 19:let targetRotate = prompt("Rotate (Ex. 120)" ,  a.style.transform)
+                        a.style.transform = `rotate( ${targetRotate}deg )`
+                        break;
+                case 20:break
+                default:alert("Invaid Value!!!")
+                    break;
+            }
+            
+
+
+            // console.log(window.getComputedStyle(a).width)
+            // console.log(window.getComputedStyle(a).borderColor)
+           
+            // let left = prompt("left (include px,em,% with value)", window.getComputedStyle(a).left);
+            // let top = prompt("top (include px,em,% with value)",window.getComputedStyle(a).top);
+           
+
+        }
+    </script>
+</body>
+
+</html>
